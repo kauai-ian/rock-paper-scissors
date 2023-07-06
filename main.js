@@ -7,6 +7,8 @@
 // computer and player play 5 rounds.
 
 const options = ["rock", "paper", "scissors"];
+let scorePlayer = 0;
+let scoreComputer = 0;
 
 function getComputerChoice() {
   const randomChoice = Math.floor(Math.random() * options.length); // this will allow everything to run without brackets. calculates random. reads better.
@@ -14,7 +16,6 @@ function getComputerChoice() {
   // console.log("Computer chooses", choice);
   return choice;
 }
-getComputerChoice();
 
 function checkWinner(playerSelection, computerSelection) {
   if (playerSelection == computerSelection) {
@@ -35,50 +36,50 @@ function playRound(playerSelection, computerSelection) {
   if (result == "tie") {
     return "It's a Tie!";
   } else if (result == "player") {
+    scorePlayer++;
     return `You win, ${playerSelection} beats ${computerSelection}`;
   } else {
+    scoreComputer++;
     return `You lose, computer wins, ${computerSelection} beats ${playerSelection}`;
   }
 }
 
-function getPlayerChoice() {
-  let validatedInput = false;
-  while (validatedInput == false) {
-    let choice = prompt("Lets Play! Choose either rock, paper, or scissors");
-    if (choice == null) {
-      continue;
-    }
-    const choiceInLower = choice.toLowerCase();
-    if (options.includes(choiceInLower)) {
-      validatedInput = true;
-      return choiceInLower;
-    }
-  }
-}
-getPlayerChoice();
+const rock = document.getElementById("js-rock");
+const paper = document.getElementById("js-paper");
+const scissors = document.getElementById("js-scissors");
+const playerScoreElm = document.getElementById("js-playerScore");
+const compScoreElm = document.getElementById("js-computerScore");
+const $winnerElm = document.getElementById("js-winner");
+const resetBtn = document.getElementById("js-resetBtn");
 
-function game() {
-  let scorePlayer = 0;
-  let scoreComputer = 0;
-  console.log("Welcome!");
-  for (i = 0; i < 5; i++) {
-    const playerSelection = getPlayerChoice();
-    const computerSelection = getComputerChoice();
-    console.log(playRound(playerSelection, computerSelection));
-    console.log("-----------------------");
-    if (checkWinner(playerSelection, computerSelection) == "player") {
-      scorePlayer++;
-    } else if (checkWinner(playerSelection, computerSelection) == "computer") {
-      scoreComputer++;
-    }
-  }
-  console.log("Game is over");
-  if (scorePlayer > scoreComputer) {
-    console.log("Player was the winner");
-  } else if (scorePlayer < scoreComputer) {
-    console.log("Computer was the winner");
-  } else if (scorePlayer == scoreComputer) {
-    console.log("We have a tie game!");
+function game(playerSelection) {
+  const computerSelection = getComputerChoice();
+  playRound(playerSelection, computerSelection);
+  playerScoreElm.innerHTML = scorePlayer;
+  compScoreElm.innerHTML = scoreComputer;
+  if (scoreComputer === 5 || scorePlayer === 5) {
+    const winner = scoreComputer === 5 ? "Computer" : "Player";
+    $winnerElm.innerHTML = `Game Over, ${winner} wins!`;
+    resetBtn.classList.remove("hidden");
   }
 }
-game();
+function resetGame() {
+  console.log("reset called");
+  scoreComputer = 0;
+  scorePlayer = 0;
+  $winnerElm.innerHTML = "";
+  resetBtn.classList.add("hidden");
+  playerScoreElm.innerHTML = 0;
+  compScoreElm.innerHTML = 0;
+}
+resetBtn.addEventListener("click", resetGame);
+
+rock.addEventListener("click", (evt) => {
+  game("rock");
+});
+paper.addEventListener("click", (evt) => {
+  game("paper");
+});
+scissors.addEventListener("click", (evt) => {
+  game("scissors");
+});
