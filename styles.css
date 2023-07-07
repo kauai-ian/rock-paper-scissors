@@ -1,0 +1,45 @@
+* {
+  text-align: center;
+}
+
+body {
+  background-color: #0551a320;
+}
+
+button {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+  background-color: #083a0740;
+  border-radius: 8px;
+  border: none;
+  padding: 20px;
+  text-transform: uppercase;
+}
+
+.buttonSection {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20%;
+}
+
+.results {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  font-weight: bold;
+  margin-top: 40px;
+}
+
+#js-rock {
+  background-color: greenyellow;
+}
+
+#js-paper {
+  background-color: #c011ee;
+  color: #fff;
+}
+
+#js-scissors {
+  background-color: #c01100;
+  color: #fff;
+}

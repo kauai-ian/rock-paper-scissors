@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Rock_Paper_Scissors</title>
     <style>
       .hidden {
@@ -13,9 +14,12 @@
   </head>
   <body>
     <h1>Welcome to the game Rock, Paper, Scissors!</h1>
-    <button id="js-rock" data-val="rock">Rock</button>
-    <button id="js-paper">Paper</button>
-    <button id="js-scissors">Scissors</button>
+    <p class="choose">First one to win 5 rounds wins the game</p>
+    <div class="buttonSection">
+      <button id="js-rock" data-val="rock">Rock</button>
+      <button id="js-paper" data-val="paper">Paper</button>
+      <button id="js-scissors" data-val="scissors">Scissors</button>
+    </div>
     <div class="results">
       <div>
         <p>Player Score</p>
